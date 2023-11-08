@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            margin-top: 10px;
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white; 
+        }
+        
+        table, th, td {
+            border: 1px solid blue; 
+        }
+
+        th {
+            background-color: blue; 
+            color: white; 
+        }
+        .center-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 100vh;  */
+        }
+
+    </style>
+</head>
+<body>
+    <button id="downloadButton">Download CSV</button>
+    <div class="center-container">
+        <div id="tableContainer" ></div>
+    </div>
+
+    <script>
+        const numStudents = 120;
+        const dummyCSV = createDummyCSV(numStudents);
+        const tableContainer = document.getElementById('tableContainer');
+        const table = createTableFromCSV(dummyCSV);
+        tableContainer.appendChild(table);
+
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            downloadDummyCSV(dummyCSV);
+        });
+
+        function getRandomInt(min, max){
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function getRandomAlphaNumeric(length){
+            const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            let result = "";
+            for (let i = 0; i < length; i++) {
+                const randomIndex = getRandomInt(0, charset.length - 1);
+                result += charset.charAt(randomIndex);
+            }
+            return result;
+        }
+
+        function getRandomChineseName(length) {
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                const randomChar = String.fromCharCode(Math.floor(Math.random() * (0x9FA5 - 0x4E00) + 0x4E00));
+                result += randomChar;
+            }
+            return result;
+        }
+
+        function createDummyCSV(numStudents){
+            const departments = ["資工系", "資工所", "電資AI", "電資資安", "創新AI"];
+            const department_obj = {
+                "資工系": "590",
+                "資工所": "598",
+                "電資AI": "C52",
+                "電資資安": "C53",
+                "創新AI": "C71"
+            }
+            const assignments = ["作業一", "作業二", "作業三", "作業四", "作業五", "作業六", "作業七", "作業八", "作業九", "作業十"];
+
+            let csv = "序號,班級,學號,姓名,GitHub帳號," + assignments.join(",") + "\n";
+
+            for(let i = 1; i<=numStudents; i++){
+                const department = departments[getRandomInt(0, departments.length - 1)];
+                const studentID = `${getRandomInt(111, 112)}${department_obj[department]}${getRandomInt(0, 9)}${getRandomInt(0, 9)}${getRandomInt(1, 9)}`;
+                const studentName = getRandomChineseName(3);
+                const githubAccount = getRandomAlphaNumeric(10);
+                const scores = [];
+
+                for (let j = 0; j < assignments.length; j++){
+                    scores.push(getRandomInt(0, 10));
+                }
+
+                const row = `${i},${department},${studentID},${studentName},${githubAccount},${scores.join(",")}`;
+                csv += row + "\n";
+            }
+            return csv;
+        }
+
+        function createTableFromCSV(csv){
+            const rows = csv.split('\n');
+            const table = document.createElement('table');
+            rows.forEach(row=>{
+                const rowData = row.split(',');
+                const tr = document.createElement('tr');
+
+                rowData.forEach(cellData => {
+                    const td = document.createElement('td');
+                    td.textContent = cellData;
+                    tr.appendChild(td);
+                });
+
+                table.appendChild(tr);
+            })
+            return table;
+        }
+
+        function downloadDummyCSV(csv){
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'dummy.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
