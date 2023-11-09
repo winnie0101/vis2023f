@@ -1,0 +1,14 @@
+{
+  "name": "63214789856efc37",
+  "main": "63214789856efc37@17.js",
+  "version": "17.0.0",
+  "homepage": "https://observablehq.com/d/63214789856efc37",
+  "author": {
+    "name": "北科大-黃筱崴's Workspace",
+    "url": "https://observablehq.com/@bei-ke-da-huang-xiao-wei-ws"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
