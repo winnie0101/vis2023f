@@ -3,7 +3,7 @@ md`# HW2 Simple baseline`
 )}
 
 function _data(FileAttachment){return(
-FileAttachment("../src/data.json").json()
+FileAttachment("../../src/data.json").json()
 )}
 
 function _3(Plot,plot1,data){return(

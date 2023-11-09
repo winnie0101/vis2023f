@@ -3,7 +3,7 @@ md`# HW2 Strong baseline`
 )}
 
 function _data(FileAttachment){return(
-FileAttachment("../src/data.json").json()
+FileAttachment("../../src/data.json").json()
 )}
 
 function _yCounts(){return(
