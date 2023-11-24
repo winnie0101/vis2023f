@@ -1,0 +1,14 @@
+{
+  "name": "df23b25bbd681fae",
+  "main": "df23b25bbd681fae@64.js",
+  "version": "64.0.0",
+  "homepage": "https://observablehq.com/d/df23b25bbd681fae",
+  "author": {
+    "name": "北科大-黃筱崴's Workspace",
+    "url": "https://observablehq.com/@bei-ke-da-huang-xiao-wei-ws"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
